@@ -1,8 +1,8 @@
-
 import './App.css';
 import { useState } from 'react';
 
 function App() {
+
   const [userData, setUserData] = useState({
     email: '',
     password: ''
@@ -48,6 +48,26 @@ function App() {
 
   return (
     <div className="App">
+      <h1>ストップウォッチ</h1>
+      <p> レッスン課題 </p>
+      <div className='timer-container'>
+        <div class="timer-box">
+          <h1>00</h1>
+        </div>
+        <span class="colon">:</span>
+        <div class="timer-box">
+          <h1>00</h1>
+        </div>
+        <span class="colon">:</span>
+        <div class="timer-box">
+          <h1>000</h1>
+        </div>
+      </div>
+      <div class = "button-container">
+        <button>start</button>
+        <button>pause</button>
+        <button>Reset</button>
+      </div>
       <h2>ユーザー登録</h2>
       <form onSubmit={handleSubmit}>
         <div>
