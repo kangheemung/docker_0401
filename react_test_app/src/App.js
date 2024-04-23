@@ -2,6 +2,9 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
+const [time,setTime]=useState(0);
+const [isRunning,setIsRunning]=useState(false);
+const [intervalId, setIntervalId] = useState(null);
 
   const [userData, setUserData] = useState({
     email: '',
@@ -17,6 +20,25 @@ function App() {
 
     console.log(userData);
   }
+//timer
+const startTimer = () => {
+  if (!isRunning) {
+    const id = setInterval(() => {
+      setTime(prevTime => prevTime + 1);
+    }, 1000);
+    setIntervalId(id);
+  }
+};
+const stopTimer = () => {
+  setIsRunning(false);
+  clearInterval(intervalId);
+};
+const resetTimer = () => {
+  setIsRunning(false);
+  setTime(0);
+  clearInterval(intervalId);
+  setIntervalId(null);
+};
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,24 +71,24 @@ function App() {
   return (
     <div className="App">
       <h1>ストップウォッチ</h1>
-      <p> レッスン課題 </p>
-      <div className='timer-container'>
-        <div class="timer-box">
-          <h1>00</h1>
+      <p>レッスン課題</p>
+      <div className = "timer-container">
+        <div className ="timer-box">
+          <h1>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}</h1>
         </div>
-        <span class="colon">:</span>
-        <div class="timer-box">
-          <h1>00</h1>
+        <span className ="colon">:</span>
+        <div className ="timer-box">
+          <h1>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</h1>
         </div>
-        <span class="colon">:</span>
-        <div class="timer-box">
-          <h1>000</h1>
+        <span className ="colon">:</span>
+        <div className ="timer-box">
+          <h1>{("000" + (time % 1000)).slice(-3)}</h1>
         </div>
       </div>
-      <div class = "button-container">
-        <button>start</button>
-        <button>pause</button>
-        <button>Reset</button>
+      <div className = "button-container">
+        <button onClick={startTimer}>start</button>
+        <button onClick={stopTimer}>pause</button>
+        <button onClick={resetTimer}>Reset</button>
       </div>
       <h2>ユーザー登録</h2>
       <form onSubmit={handleSubmit}>
