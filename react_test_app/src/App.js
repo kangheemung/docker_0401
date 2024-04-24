@@ -26,6 +26,7 @@ const startTimer = () => {
     const id = setInterval(() => {
       setTime(prevTime => prevTime + 1);
     }, 1000);
+    setIsRunning(true); // Update isRunning state to true
     setIntervalId(id);
   }
 };
@@ -72,20 +73,20 @@ const resetTimer = () => {
     <div className="App">
       <h1>ストップウォッチ</h1>
       <p>レッスン課題</p>
-      <div className = "timer-container">
-        <div className ="timer-box">
-          <h1>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}</h1>
+      <div className="timer-container">
+        <div className="timer-box">
+         <h1>{("00" + Math.floor(time / 3600)).slice(-2)}</h1>
         </div>
-        <span className ="colon">:</span>
-        <div className ="timer-box">
-          <h1>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</h1>
+        <span className="colon">:</span>
+        <div className="timer-box">
+         <h1>{("00" + Math.floor((time / 60) % 60)).slice(-2)}</h1>
         </div>
-        <span className ="colon">:</span>
-        <div className ="timer-box">
-          <h1>{("000" + (time % 1000)).slice(-3)}</h1>
+        <span className="colon">:</span>
+        <div className="timer-box">
+          <h1>{("000" +(time % 60)).slice(-3)}</h1>
         </div>
       </div>
-      <div className = "button-container">
+      <div className="button-container">
         <button onClick={startTimer}>start</button>
         <button onClick={stopTimer}>pause</button>
         <button onClick={resetTimer}>Reset</button>
